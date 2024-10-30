@@ -12,7 +12,7 @@ bot.command("start", async (ctx) => await ctx.replyWithGame(GAME_SHORT_NAME));
 // 处理其他的消息。
 bot.on("message", (ctx) => ctx.reply("Got another message!"));
 
-const GAME_URL = "http://3.25.238.255/farm/";
+const GAME_URL = "http://3.25.96.209/farm/";
 bot.on("callback_query:game_short_name", async (ctx) => {
   console.log(
     "ctx.callbackQuery.game_short_name = ",
