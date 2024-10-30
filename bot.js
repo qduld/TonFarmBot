@@ -18,7 +18,7 @@ const GAME_SHORT_NAME = "menghuan";
 bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () { return yield ctx.replyWithGame(GAME_SHORT_NAME); }));
 // 处理其他的消息。
 bot.on("message", (ctx) => ctx.reply("Got another message!"));
-const GAME_URL = "http://3.25.238.255/farm/";
+const GAME_URL = "http://3.25.96.209/farm/";
 bot.on("callback_query:game_short_name", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("ctx.callbackQuery.game_short_name = ", ctx.callbackQuery.game_short_name);
     if (ctx.callbackQuery.game_short_name === GAME_SHORT_NAME) {
