@@ -31,6 +31,8 @@ bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
                         },
                     ],
                 ],
+                resize_keyboard: true,
+                one_time_keyboard: true,
             },
         });
     }

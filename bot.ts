@@ -24,6 +24,8 @@ bot.command("start", async (ctx) => {
             },
           ],
         ],
+        resize_keyboard: true,
+        one_time_keyboard: true,
       },
     });
   } catch (error) {
