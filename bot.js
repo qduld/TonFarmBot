@@ -64,9 +64,11 @@ bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () { r
 bot.on("message", (ctx) => ctx.reply("Got another message!"));
 const GAME_URL = "http://3.25.96.209/farm/";
 bot.on("callback_query:game_short_name", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     console.log("ctx.callbackQuery.game_short_name = ", ctx.callbackQuery.game_short_name);
     if (ctx.callbackQuery.game_short_name === GAME_SHORT_NAME) {
-        yield ctx.answerCallbackQuery({ url: GAME_URL });
+        yield ctx.reply(`${(_a = ctx === null || ctx === void 0 ? void 0 : ctx.from) === null || _a === void 0 ? void 0 : _a.id}ddddddd`);
+        // await ctx.answerCallbackQuery({ url: GAME_URL });
     }
 }));
 bot.command("help", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
