@@ -7,14 +7,26 @@ const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
 
 // 处理 /start 命令，启动游戏并带有按钮
 bot.command("start", async (ctx) => {
+  console.log("Sending game button with URL:", GAME_URL); // 输出游戏 URL
   try {
-    console.log("Received /start command, sending reply...");
-    // 回复一个带有按钮的消息，按钮点击后会打开 Web App
     await ctx.reply("欢迎使用游戏！点击下面的按钮开始游戏。", {
-      reply_markup: new InlineKeyboard().text("开始游戏", GAME_URL),
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "开始游戏",
+              web_app: {
+                url: GAME_URL, // 确保这个 URL 正确
+              },
+            },
+          ],
+        ],
+        resize_keyboard: true,
+        one_time_keyboard: true,
+      },
     });
   } catch (error) {
-    console.error("Error handling /start command:", error);
+    console.error("Error sending game button:", error);
   }
 });
 
