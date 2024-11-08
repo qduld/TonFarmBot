@@ -9,7 +9,7 @@ const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
 bot.command("start", async (ctx) => {
   console.log("Received /start command");
   try {
-    const keyboard = new InlineKeyboard().text("开始游戏", GAME_URL);
+    const keyboard = new InlineKeyboard().url("开始游戏", GAME_URL); // 使用 .url() 创建一个按钮，传递 Web App 的 URL
     console.log("Sending reply with button");
     await ctx.reply("欢迎使用游戏！点击下面的按钮开始游戏。", {
       reply_markup: keyboard,
@@ -19,16 +19,6 @@ bot.command("start", async (ctx) => {
     console.error("Error handling /start command:", error);
   }
 });
-
-// bot.command("start", async (ctx) => {
-//   console.log("Received /start command");
-//   try {
-//     await ctx.replyWithGame(GAME_SHORT_NAME);
-//     console.log("Game reply sent");
-//   } catch (error) {
-//     console.error("Error sending game:", error);
-//   }
-// });
 
 // 处理游戏回调查询
 bot.on("callback_query", async (ctx) => {
