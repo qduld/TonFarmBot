@@ -10,7 +10,7 @@ bot.command("start", async (ctx) => {
   console.log("Received /start command");
   try {
     // 使用 callback_data 创建按钮
-    const keyboard = new InlineKeyboard().text("开始游戏", GAME_SHORT_NAME);
+    const keyboard = new InlineKeyboard().webApp("开始游戏", GAME_URL);
     console.log("Sending reply with button");
     await ctx.reply("欢迎使用游戏！点击下面的按钮开始游戏。", {
       reply_markup: keyboard,

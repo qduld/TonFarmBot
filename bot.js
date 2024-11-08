@@ -18,7 +18,7 @@ bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Received /start command");
     try {
         // 使用 callback_data 创建按钮
-        const keyboard = new grammy_1.InlineKeyboard().text("开始游戏", GAME_SHORT_NAME);
+        const keyboard = new grammy_1.InlineKeyboard().webApp("开始游戏", GAME_URL);
         console.log("Sending reply with button");
         yield ctx.reply("欢迎使用游戏！点击下面的按钮开始游戏。", {
             reply_markup: keyboard,
