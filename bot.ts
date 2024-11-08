@@ -18,7 +18,15 @@ const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
 //   }
 // });
 
-bot.command("start", async (ctx) => await ctx.replyWithGame(GAME_SHORT_NAME));
+bot.command("start", async (ctx) => {
+  console.log("Received /start command");
+  try {
+    await ctx.replyWithGame(GAME_SHORT_NAME);
+    console.log("Game reply sent");
+  } catch (error) {
+    console.error("Error sending game:", error);
+  }
+});
 
 // 处理游戏回调查询
 bot.on("callback_query", async (ctx) => {
@@ -29,6 +37,11 @@ bot.on("callback_query", async (ctx) => {
     // 通过回调查询打开 Web App
     await ctx.answerCallbackQuery({ url: GAME_URL });
   }
+});
+
+bot.command("help", async (ctx) => {
+  console.log("Received /help command");
+  await ctx.reply("帮助信息：你可以使用 /start 来开始游戏");
 });
 
 // 处理其他消息

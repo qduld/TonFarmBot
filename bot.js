@@ -25,7 +25,16 @@ const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
 //     console.error("Error handling /start command:", error);
 //   }
 // });
-bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () { return yield ctx.replyWithGame(GAME_SHORT_NAME); }));
+bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Received /start command");
+    try {
+        yield ctx.replyWithGame(GAME_SHORT_NAME);
+        console.log("Game reply sent");
+    }
+    catch (error) {
+        console.error("Error sending game:", error);
+    }
+}));
 // 处理游戏回调查询
 bot.on("callback_query", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const callbackData = ctx.callbackQuery.data;
@@ -34,6 +43,10 @@ bot.on("callback_query", (ctx) => __awaiter(void 0, void 0, void 0, function* ()
         // 通过回调查询打开 Web App
         yield ctx.answerCallbackQuery({ url: GAME_URL });
     }
+}));
+bot.command("help", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Received /help command");
+    yield ctx.reply("帮助信息：你可以使用 /start 来开始游戏");
 }));
 // 处理其他消息
 bot.on("message", (ctx) => ctx.reply("Got another message!"));
