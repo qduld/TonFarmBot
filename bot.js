@@ -69,6 +69,11 @@ bot.on("callback_query:game_short_name", (ctx) => __awaiter(void 0, void 0, void
         yield ctx.answerCallbackQuery({ url: GAME_URL });
     }
 }));
+bot.command("help", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    console.log("Received /help command");
+    yield ctx.reply(`${(_a = ctx === null || ctx === void 0 ? void 0 : ctx.from) === null || _a === void 0 ? void 0 : _a.id}ddddddd`);
+}));
 // bot.command(
 //   "start",
 //   async (ctx) =>

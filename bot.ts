@@ -77,6 +77,11 @@ bot.on("callback_query:game_short_name", async (ctx) => {
   }
 });
 
+bot.command("help", async (ctx) => {
+  console.log("Received /help command");
+  await ctx.reply(`${ctx?.from?.id}ddddddd`);
+});
+
 // bot.command(
 //   "start",
 //   async (ctx) =>
