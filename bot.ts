@@ -1,6 +1,6 @@
 import { Bot, InlineKeyboard } from "grammy";
 
-const bot = new Bot("YOUR_BOT_TOKEN_HERE"); // 替换为你的 bot token
+const bot = new Bot("7360724156:AAGeBGUrfDuRRYTkL-G4ZWKmi3rIKWH05VU"); // 替换为你的 bot token
 
 const GAME_SHORT_NAME = "menghuan"; // 游戏的短名称
 const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
