@@ -1,6 +1,4 @@
 "use strict";
-// 现在，你已经确定了将如何处理信息，可以开始运行你的 bot。
-// 这将连接到 Telegram 服务器并等待消息。
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -19,44 +17,25 @@ const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
 bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log("Received /start command, sending reply...");
+        // 回复一个带有按钮的消息，按钮点击后会打开 Web App
         yield ctx.reply("欢迎使用游戏！点击下面的按钮开始游戏。", {
-            reply_markup: {
-                inline_keyboard: [
-                    [
-                        {
-                            text: "开始游戏",
-                            web_app: {
-                                url: GAME_URL,
-                            },
-                        },
-                    ],
-                ],
-                resize_keyboard: true,
-                one_time_keyboard: true,
-            },
+            reply_markup: new grammy_1.InlineKeyboard().text("开始游戏", GAME_URL),
         });
     }
     catch (error) {
         console.error("Error handling /start command:", error);
     }
 }));
-// 处理其他消息
-bot.on("message", (ctx) => ctx.reply("Got another message!"));
 // 处理游戏回调查询
-bot.on("callback_query:game_short_name", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("Received callback query:", ctx.callbackQuery.game_short_name);
-    if (ctx.callbackQuery.game_short_name === GAME_SHORT_NAME) {
-        // 当回调查询的游戏名称匹配时，打开 Web App URL
+bot.on("callback_query", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    const callbackData = ctx.callbackQuery.data;
+    if (callbackData === GAME_SHORT_NAME) {
+        console.log("Received callback query for game:", callbackData);
+        // 通过回调查询打开 Web App
         yield ctx.answerCallbackQuery({ url: GAME_URL });
     }
 }));
-// bot.command(
-//   "start",
-//   async (ctx) =>
-//     await ctx.reply(
-//       '<b>Hi!</b> <i>Welcome</i> to <a href="http://3.25.238.255/farm/">grammY</a>.',
-//       { parse_mode: "HTML" }
-//     )
-// );
+// 处理其他消息
+bot.on("message", (ctx) => ctx.reply("Got another message!"));
 // 启动 bot，等待消息和回调查询
 bot.start();
