@@ -14,18 +14,18 @@ const bot = new grammy_1.Bot("7360724156:AAGeBGUrfDuRRYTkL-G4ZWKmi3rIKWH05VU"); 
 const GAME_SHORT_NAME = "menghuan"; // 游戏的短名称
 const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
 // 处理 /start 命令，启动游戏并带有按钮
-bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        console.log("Received /start command, sending reply...");
-        // 回复一个带有按钮的消息，按钮点击后会打开 Web App
-        yield ctx.reply("欢迎使用游戏！点击下面的按钮开始游戏。", {
-            reply_markup: new grammy_1.InlineKeyboard().text("开始游戏", GAME_URL),
-        });
-    }
-    catch (error) {
-        console.error("Error handling /start command:", error);
-    }
-}));
+// bot.command("start", async (ctx) => {
+//   try {
+//     console.log("Received /start command, sending reply...");
+//     // 回复一个带有按钮的消息，按钮点击后会打开 Web App
+//     await ctx.reply("欢迎使用游戏！点击下面的按钮开始游戏。", {
+//       reply_markup: new InlineKeyboard().text("开始游戏", GAME_URL),
+//     });
+//   } catch (error) {
+//     console.error("Error handling /start command:", error);
+//   }
+// });
+bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () { return yield ctx.replyWithGame(GAME_SHORT_NAME); }));
 // 处理游戏回调查询
 bot.on("callback_query", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const callbackData = ctx.callbackQuery.data;
