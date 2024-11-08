@@ -15,23 +15,28 @@ const grammy_1 = require("grammy");
 const bot = new grammy_1.Bot("7360724156:AAGeBGUrfDuRRYTkL-G4ZWKmi3rIKWH05VU"); // <-- 替换为你的 bot token
 const GAME_SHORT_NAME = "menghuan"; // 游戏的短名称
 const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
-// 处理 /start 命令，启动游戏
 // 处理 /start 命令，启动游戏并带有按钮
 bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    yield ctx.reply("欢迎来到游戏！点击下面的按钮开始游戏。", {
-        reply_markup: {
-            inline_keyboard: [
-                [
-                    {
-                        text: "开始游戏",
-                        web_app: {
-                            url: GAME_URL, // 当按钮被点击时打开的 Web App URL
+    try {
+        console.log("Received /start command, sending reply...");
+        yield ctx.reply("欢迎使用游戏！点击下面的按钮开始游戏。", {
+            reply_markup: {
+                inline_keyboard: [
+                    [
+                        {
+                            text: "开始游戏",
+                            web_app: {
+                                url: GAME_URL,
+                            },
                         },
-                    },
+                    ],
                 ],
-            ],
-        },
-    });
+            },
+        });
+    }
+    catch (error) {
+        console.error("Error handling /start command:", error);
+    }
 }));
 // 处理其他消息
 bot.on("message", (ctx) => ctx.reply("Got another message!"));
