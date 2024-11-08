@@ -1,6 +1,6 @@
 import { Bot, InlineKeyboard } from "grammy";
 
-const bot = new Bot("7360724156:AAGeBGUrfDuRRYTkL-G4ZWKmi3rIKWH05VU"); // <-- 替换为你的 bot token
+const bot = new Bot("YOUR_BOT_TOKEN_HERE"); // 替换为你的 bot token
 
 const GAME_SHORT_NAME = "menghuan"; // 游戏的短名称
 const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
@@ -9,7 +9,8 @@ const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
 bot.command("start", async (ctx) => {
   console.log("Received /start command");
   try {
-    const keyboard = new InlineKeyboard().url("开始游戏", GAME_URL); // 使用 .url() 创建一个按钮，传递 Web App 的 URL
+    // 使用 callback_data 创建按钮
+    const keyboard = new InlineKeyboard().text("开始游戏", GAME_SHORT_NAME);
     console.log("Sending reply with button");
     await ctx.reply("欢迎使用游戏！点击下面的按钮开始游戏。", {
       reply_markup: keyboard,
@@ -20,14 +21,16 @@ bot.command("start", async (ctx) => {
   }
 });
 
-// 处理游戏回调查询
-bot.on("callback_query", async (ctx) => {
+// 处理 callback_query 以在 Telegram 中打开 Web App
+bot.on("callback_query:data", async (ctx) => {
   const callbackData = ctx.callbackQuery.data;
 
   if (callbackData === GAME_SHORT_NAME) {
     console.log("Received callback query for game:", callbackData);
-    // 通过回调查询打开 Web App
-    await ctx.answerCallbackQuery({ url: GAME_URL });
+    // 使用 answerCallbackQuery 打开 Web App URL
+    await ctx.answerCallbackQuery({
+      url: GAME_URL,
+    });
   }
 });
 

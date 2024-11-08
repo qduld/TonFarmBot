@@ -10,14 +10,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const grammy_1 = require("grammy");
-const bot = new grammy_1.Bot("7360724156:AAGeBGUrfDuRRYTkL-G4ZWKmi3rIKWH05VU"); // <-- 替换为你的 bot token
+const bot = new grammy_1.Bot("YOUR_BOT_TOKEN_HERE"); // 替换为你的 bot token
 const GAME_SHORT_NAME = "menghuan"; // 游戏的短名称
 const GAME_URL = "http://3.25.96.209/farm/"; // Web App 的 URL
 // 处理 /start 命令，启动游戏并带有按钮
 bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Received /start command");
     try {
-        const keyboard = new grammy_1.InlineKeyboard().url("开始游戏", GAME_URL); // 使用 .url() 创建一个按钮，传递 Web App 的 URL
+        // 使用 callback_data 创建按钮
+        const keyboard = new grammy_1.InlineKeyboard().text("开始游戏", GAME_SHORT_NAME);
         console.log("Sending reply with button");
         yield ctx.reply("欢迎使用游戏！点击下面的按钮开始游戏。", {
             reply_markup: keyboard,
@@ -28,13 +29,15 @@ bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
         console.error("Error handling /start command:", error);
     }
 }));
-// 处理游戏回调查询
-bot.on("callback_query", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+// 处理 callback_query 以在 Telegram 中打开 Web App
+bot.on("callback_query:data", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const callbackData = ctx.callbackQuery.data;
     if (callbackData === GAME_SHORT_NAME) {
         console.log("Received callback query for game:", callbackData);
-        // 通过回调查询打开 Web App
-        yield ctx.answerCallbackQuery({ url: GAME_URL });
+        // 使用 answerCallbackQuery 打开 Web App URL
+        yield ctx.answerCallbackQuery({
+            url: GAME_URL,
+        });
     }
 }));
 bot.command("help", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
