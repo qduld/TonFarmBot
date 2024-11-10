@@ -73,8 +73,8 @@ bot.on("callback_query:game_short_name", async (ctx) => {
     ctx.callbackQuery.game_short_name
   );
   if (ctx.callbackQuery.game_short_name === GAME_SHORT_NAME) {
-    await ctx.reply(`${ctx?.from?.id}ddddddd`);
-    // await ctx.answerCallbackQuery({ url: GAME_URL });
+    // await ctx.reply(`${ctx?.from?.id}ddddddd`);
+    await ctx.answerCallbackQuery({ url: GAME_URL });
   }
 });
 
