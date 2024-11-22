@@ -60,13 +60,29 @@ const bot = new Bot("7360724156:AAGeBGUrfDuRRYTkL-G4ZWKmi3rIKWH05VU"); // <-- �
 // 当用户向你的 bot 发送消息时，grammY 将调用已注册的监听器。
 
 const GAME_SHORT_NAME = "menghuan";
+const GAME_URL = "http://3.25.96.209/farm/";
 
 // 处理 /start 命令。
-bot.command("start", async (ctx) => await ctx.replyWithGame(GAME_SHORT_NAME));
+// bot.command("start", async (ctx) => await ctx.replyWithGame(GAME_SHORT_NAME));
+
+bot.command("start", (ctx) => {
+  ctx.reply("Click the button below to play the game:", {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: "Play Game",
+            web_app: { url: GAME_URL },
+          },
+        ],
+      ],
+    },
+  });
+});
+
 // 处理其他的消息。
 bot.on("message", (ctx) => ctx.reply("Got another message!"));
 
-const GAME_URL = "http://3.25.96.209/farm/";
 bot.on("callback_query:game_short_name", async (ctx) => {
   console.log(
     "ctx.callbackQuery.game_short_name = ",
